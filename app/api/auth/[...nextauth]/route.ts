@@ -20,7 +20,23 @@ export default NextAuth({
             },
             async authorize(credentials, req) {
                 // Add logic here to look up the user from the credentials supplied
-                const user = {id: "1", name: "elluis", email: "elluis@example.com"}
+                // const user = {id: "1", name: "elluis", email: "elluis@example.com"}
+
+                // use /api/login route to verify credentials
+                const response = await fetch("/api/login", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                            credentials?.username,
+                        credentials?.password,
+                })
+            })
+
+                const user
+                await response.json();
+
 
                 if (user) {
                     // Any object returned will be saved in `user` property of the JWT
